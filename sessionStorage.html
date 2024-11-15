@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="timer"></p>   <!--crazione paragrafo del timer-->
+    <script> //inizio JS
+      let i = sessionStorage.getItem('count')              ?                     parseInt(sessionStorage.getItem('count'))          :                 0
+//dichiara variabile i e la assegna la funzione   condizione ternaria            se è vero che esiste il valore viene             separatore         se non esiste il valore   
+//che ricerca la chiave nella Session             controllo rapido               recuperato e convertito in numero con ParseInt                       0 di default
+
+
+
+       const conta = function () {  //funzione anonima assegnata alla variabile
+        i = i + 1                      // contatore ad incremento positivo
+        document.getElementById('timer').innerText = i + ' secondi di sessione aperta'; //aggiorna il testo andando a richimare l'ID del P con il DOM
+        sessionStorage.setItem('count', i)   //salva il nuovo valore di i nel SessionStorage. 
+      }
+
+      setInterval(conta, 1000)  // questa funzione esegue la funzione conta e stabilisce ogni quante contare, 1000 è uguale a un secondo.
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="title"></div>   <!--classe contenitore titolo creata -->
+    <input type="text" id="usr" placeholder="inserisci il tuo nome" /> <!--input per inserire il proprio nome -->
+    <button id="log_btn" onclick="save()">Log</button>   <!--primo pulsante per confermare il testo scritto e richiamo della funzione all'invio(onclick) -->
+    <button id="delete_btn" onclick="deleteData()">Delete data</button> <!--secondo pulsante per eliminare il testo precedentemente scritto dalla storage e richiamo della funzione all'invio(onclick) -->
+
+    <script>  //inizio JS
+      const check = function () {  //dichiarazione variabile associata a funzione anonima, questa funzione dovrà immagazzinare il nome dato nel contenitore 'title'
+        if (localStorage.getItem('usr')) { //condizione, verifica la presenza nel localStorage della chiave id
+          txt = 'Ciao, ' + localStorage.getItem('usr')  //se esiste lo fa leggere, txt è una variabile globale non dichiarata prima
+        } else {
+          txt = 'Accesso non effettuato'   //se non esiste c'è un messaggio di riserva
+        }
+        document.querySelector('.title').innerHTML = txt   //tramite il DOM si va a prendere il contenitore titolo e inserire la vaariabile globale txt come innerHTML
+      }
+
+      const save = function () {  //dichiarazione variabile associata a funzione anonima
+        let usr = document.getElementById('usr').value  //si assegna, a una variabile usr, utilizzando il DOM, il valore dell'input dell'HTML. Il value va usato per prendere cosa inserisce l'utente
+        localStorage.setItem('usr', usr)  //tramite la funzione salva nel localStorage, prende la chiave dal valore e il valore recuperato e rende persistente il valore.
+        check()   //richiamo a quella funzione che immagazzina nel title il testo
+      }
+
+      const deleteData = function () {  //dichiarazione variabile associata a funzione anonima
+        localStorage.removeItem('usr')   //tramite la funzione rimuove elemento nel localStorage, così che darà null.
+        check()   //richiamo a quella funzione che immagazzina nel title il testo(ora avrà null)
+      }
+
+      window.onload = check //eseguito al caricamento della pagina
+    </script>
+  </body>
+</html>
